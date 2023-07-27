@@ -1,0 +1,16 @@
+server:
+  error:
+    include-message: always
+spring:
+  datasource:
+    driver-class-name: com.mongodb.Mongo
+  data:
+    mongodb:
+      host: localhost
+      database: ex-rest
+      port: 27017
+logging:
+  level:
+    ROOT: DEBUG
+debug: true
+
