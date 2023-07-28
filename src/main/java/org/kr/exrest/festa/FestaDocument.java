@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.kr.exrest.servico.Servico;
+import org.kr.exrest.servico.ServicoDocument;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-@Accessors(fluent = true)
+//@Accessors(fluent = true)
 @Getter
 @Setter
 @ToString
@@ -24,5 +25,5 @@ public class FestaDocument {
     private String motivo;
     private LocalDate data;
     private BigDecimal orcamento;
-    private List<Servico> servicos;
+    private List<ServicoDocument> servicos;
 }

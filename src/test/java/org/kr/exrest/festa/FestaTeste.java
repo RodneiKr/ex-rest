@@ -15,18 +15,19 @@ public class FestaTeste {
     }
     @Test
     public void atributosPreenchidosCorretamente() {
-        final Servico servico = new Servico()
-                .nome("crepe")
-                .descricao("crepes salgados e doces")
-                .valor(BigDecimal.TWO);
-        final Festa festa = new Festa()
-                .autor("eu")
-                .motivo("fim de ano")
-                .data(LocalDate.now())
-                .orcamento(BigDecimal.TWO)
-                .servicos(Arrays.asList(servico))
-                .validate();
-        ;
+        final Servico servico = new Servico();
+        servico.setNome("crepe");
+        servico.setDescricao("crepes salgados e doces");
+        servico.setValor(BigDecimal.TWO);
+
+        final Festa festa = new Festa();
+        festa.setAutor("eu");
+        festa.setMotivo("fim de ano");
+        festa.setData(LocalDate.now());
+        festa.setOrcamento(BigDecimal.TWO);
+        festa.setServicos(Arrays.asList(servico));
+        festa.validate();
+
         Assert.isTrue(!festa.hasError(),"\n" + festa.error());
     }
     @Test
@@ -37,33 +38,36 @@ public class FestaTeste {
     }
     @Test
     public void atributosVazioOuZero() {
-        final Servico servico = new Servico()
-                .nome("")
-                .descricao("")
-                .valor(BigDecimal.ZERO);
-        final Festa festa = new Festa()
-                .autor("")
-                .motivo("")
-                .data(LocalDate.now().plusDays(-1))
-                .orcamento(BigDecimal.ZERO)
-                .servicos(Arrays.asList(servico))
-                .validate();
+        final Servico servico = new Servico();
+        servico.setNome("");
+        servico.setDescricao("");
+        servico.setValor(BigDecimal.ZERO);
+
+        final Festa festa = new Festa();
+        festa.setAutor("");
+        festa.setMotivo("");
+        festa.setData(LocalDate.now().plusDays(-1));
+        festa.setOrcamento(BigDecimal.ZERO);
+        festa.setServicos(Arrays.asList(servico));
+        festa.validate();
+
         Assert.isTrue(festa.error().size() == 7, "\n" + festa.error());
     }
     @Test
     public void foraDoOrcamento() {
-        final Servico servico = new Servico()
-                .nome("crepe")
-                .descricao("crepes salgados e doces")
-                .valor(BigDecimal.TWO);
-        final Festa festa = new Festa()
-                .autor("eu")
-                .motivo("fim de ano")
-                .data(LocalDate.now())
-                .orcamento(BigDecimal.ONE)
-                .servicos(Arrays.asList(servico))
-                .validate();
-        ;
+        final Servico servico = new Servico();
+        servico.setNome("crepe");
+        servico.setDescricao("crepes salgados e doces");
+        servico.setValor(BigDecimal.TWO);
+
+        final Festa festa = new Festa();
+        festa.setAutor("eu");
+        festa.setMotivo("fim de ano");
+        festa.setData(LocalDate.now());
+        festa.setOrcamento(BigDecimal.ONE);
+        festa.setServicos(Arrays.asList(servico));
+        festa.validate();
+
         Assert.isTrue(festa.hasError(),"\n" + festa.error());
     }
 }

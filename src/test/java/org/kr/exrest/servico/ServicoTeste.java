@@ -12,11 +12,11 @@ public class ServicoTeste {
     }
     @Test
     public void atributosPreenchidosCorretamente() {
-        final Servico servico = new Servico()
-                .nome("bar man")
-                .descricao("bebidas")
-                .valor(BigDecimal.TEN)
-                .validate();
+        final Servico servico = new Servico();
+        servico.setNome("bar man");
+        servico.setDescricao("bebidas");
+        servico.setValor(BigDecimal.TEN);
+        servico.validate();
         Assert.isTrue(!servico.hasError(),"Deveria ser FALSE\n"+ servico.error());
     }
 
@@ -27,11 +27,11 @@ public class ServicoTeste {
     }
     @Test
     public void atributosVazioOuZero() {
-        final Servico servico = new Servico()
-                .nome("")
-                .descricao("")
-                .valor(BigDecimal.ZERO)
-                .validate();
+        final Servico servico = new Servico();
+        servico.setNome("");
+        servico.setDescricao("");
+        servico.setValor(BigDecimal.ZERO);
+        servico.validate();
         Assert.isTrue(servico.error().size() == 3, "deveria ter size() == 3\n"+ servico.error());
     }
 }

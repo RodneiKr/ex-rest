@@ -6,7 +6,7 @@ import org.kr.exrest.common.AbstractKrEntity;
 
 import java.math.BigDecimal;
 
-@Accessors(fluent = true)
+//@Accessors(fluent = true)
 @Getter
 @Setter
 @ToString(callSuper = true)

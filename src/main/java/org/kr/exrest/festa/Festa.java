@@ -9,10 +9,9 @@ import org.kr.exrest.servico.Servico;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-@Accessors(fluent = true)
+//@Accessors(fluent = true)
 @Getter
 @Setter
 @ToString(callSuper = true)
@@ -22,9 +21,8 @@ public class Festa extends AbstractKrEntity {
     private LocalDate data;
     private BigDecimal orcamento;
     private List<Servico> servicos;
-    public boolean hasError() {
-        return ! this.error().isEmpty();
-    }
+
+    @Override
     public Festa validate() {
         this.validateAutor();
         this.validateMotivo();
@@ -66,7 +64,7 @@ public class Festa extends AbstractKrEntity {
     }
     private void validateServicosOrcamento() {
         final double sum = this.servicos.stream()
-                .map(m -> m.valor().doubleValue())
+                .map(m -> m.getValor().doubleValue())
                 .reduce(0.0, Double::sum);
         if (sum > this.orcamento.doubleValue()) {
             this.error().add("orcamento: deve ser MAIOR ou IGUAL a somatoria dos servicos");

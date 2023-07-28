@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-@Accessors(fluent = true)
+//@Accessors(fluent = true)
 @Getter
 @Setter
 @ToString

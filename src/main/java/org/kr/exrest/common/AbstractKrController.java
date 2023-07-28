@@ -11,32 +11,33 @@ import java.util.Optional;
 public abstract class AbstractKrController<B extends KrError, D> {
     public static final String GET_RESP_LIST = "Lista VAZIA";
     public static final String GET_RESP = "Documento não encontrado";
-    public static final String POST_RESP = "INSERt";
-    public static final String PUT_RESP = "UPDATe";
-    public static final String INVALIDO_0 = " INVÁLIDO.";
-    public static final String INVALIDO_1 = " INVÁLIDO: ";
+    public static final String DOC_INVALIDO = "Documento inválido.";
 
-    protected List<D> res(final List<D> list) {
+    protected List<D> responseGet(final List<D> list) {
         return Optional.ofNullable(list)
                 .filter((f) -> ! f.isEmpty())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, GET_RESP_LIST));
     }
-    protected D res(final D doc) {
+
+    protected D responseGet(final D doc) {
         return Optional.ofNullable(doc)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, GET_RESP));
     }
-    protected D post(final B bean, final D doc) {
-        this.krJbValidate(bean, POST_RESP);
+
+    protected D responsePost(final B bean, final D doc) {
+        this.krJbValidate(bean);
         return doc;
     }
-    protected D put(final B bean, final D doc) {
-        this.krJbValidate(bean, PUT_RESP);
+
+    protected D responsePut(final B bean, final D doc) {
+        this.krJbValidate(bean);
         return doc;
     }
-    private void krJbValidate(final B bean, final String msg) {
-        Optional.ofNullable(bean).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, msg + INVALIDO_0));
-        Optional.of(! bean.error().isEmpty())
-                .filter(f -> ! f)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, msg + INVALIDO_1 + bean.error()));
+
+    private void krJbValidate(final B bean) {
+        Optional.ofNullable(bean).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, DOC_INVALIDO));
+        if (bean.hasError()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, bean.error().toString());
+        }
     }
 }

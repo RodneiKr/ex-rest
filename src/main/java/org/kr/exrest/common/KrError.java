@@ -4,4 +4,6 @@ import java.util.List;
 
 public interface KrError {
     List<String> error();
+    boolean hasError();
+    KrError validate();
 }
