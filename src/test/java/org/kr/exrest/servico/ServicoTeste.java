@@ -1,7 +1,7 @@
 package org.kr.exrest.servico;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 
@@ -17,13 +17,13 @@ public class ServicoTeste {
         servico.setDescricao("bebidas");
         servico.setValor(BigDecimal.TEN);
         servico.validate();
-        Assert.isTrue(!servico.hasError(),"Deveria ser FALSE\n"+ servico.error());
+        Assert.assertTrue("Deveria ser FALSE\n"+ servico.error(), !servico.hasError());
     }
 
     @Test
     public void atributosIgualNull() {
         final Servico servico = new Servico().validate();
-        Assert.isTrue(servico.error().size() == 3, "deveria ter size() == 3\n"+ servico.error());
+        Assert.assertTrue("deveria ter size() == 3\n"+ servico.error(), servico.error().size() == 3);
     }
     @Test
     public void atributosVazioOuZero() {
@@ -32,6 +32,6 @@ public class ServicoTeste {
         servico.setDescricao("");
         servico.setValor(BigDecimal.ZERO);
         servico.validate();
-        Assert.isTrue(servico.error().size() == 3, "deveria ter size() == 3\n"+ servico.error());
+        Assert.assertTrue("deveria ter size() == 3\n"+ servico.error(), servico.error().size() == 3);
     }
 }

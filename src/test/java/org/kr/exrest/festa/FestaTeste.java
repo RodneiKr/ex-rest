@@ -1,8 +1,8 @@
 package org.kr.exrest.festa;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 import org.kr.exrest.servico.Servico;
-import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -28,13 +28,13 @@ public class FestaTeste {
         festa.setServicos(Arrays.asList(servico));
         festa.validate();
 
-        Assert.isTrue(!festa.hasError(),"\n" + festa.error());
+        Assert.assertTrue("\n" + festa.error(),!festa.hasError());
     }
     @Test
     public void atributosIgualNull() {
         final Servico servico = new Servico().validate();
         final Festa festa = new Festa().validate();
-        Assert.isTrue(festa.error().size() == 5, "\n" + festa.error());
+        Assert.assertTrue( "\n" + festa.error(),festa.error().size() == 5);
     }
     @Test
     public void atributosVazioOuZero() {
@@ -51,7 +51,7 @@ public class FestaTeste {
         festa.setServicos(Arrays.asList(servico));
         festa.validate();
 
-        Assert.isTrue(festa.error().size() == 7, "\n" + festa.error());
+        Assert.assertTrue( "\n" + festa.error(),festa.error().size() == 7);
     }
     @Test
     public void foraDoOrcamento() {
@@ -68,6 +68,6 @@ public class FestaTeste {
         festa.setServicos(Arrays.asList(servico));
         festa.validate();
 
-        Assert.isTrue(festa.hasError(),"\n" + festa.error());
+        Assert.assertTrue("\n" + festa.error(),festa.hasError());
     }
 }
