@@ -6,11 +6,10 @@ spring:
     driver-class-name: com.mongodb.Mongo
   data:
     mongodb:
-      host: localhost
-      database: ex-rest
-      port: 27017
+      database: ${mongodb_database:ex-rest}
+      host: ${mongodb_ip:localhost}
+      port: ${mongodb_port:27017}
 logging:
   level:
     ROOT: DEBUG
 debug: true
-

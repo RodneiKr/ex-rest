@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $mongodb_local_port:$mongodb_docker_port
+    volumes:
+      - db:/tmp
+  jar:
+    depends_on: 
+      - mongodb
+    build: .
+    env_file: ./.env
+    environment:
+      - mongodb_database=$mongodb_database
+      - mongodb_ip=mongodb
+      - mongodb_port=$mongodb_docker_port
+    ports:
+      - 8080:8080
+      - 5005:5005
+
+volumes:
+  db:
