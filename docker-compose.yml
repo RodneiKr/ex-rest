@@ -1,6 +1,28 @@
 version: "3.8"
 
 services:
+  intellij:
+    image: rycus86/intellij-idea:2023.1.2
+    environment:
+      - DISPLAY=${DISPLAY}
+      - PATH=/home/developer/jdk/bin:/home/developer/maven/bin:/usr/java/packages/lib:${PATH}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.Idea:/home/developer/.Idea
+      - ~/.Idea.java:/home/developer/.java
+      - ~/.Idea.gradle:/home/developer/.gradle
+      - ~/.Idea.share:/home/developer/.local/share/JetBrains
+      - /home/dados/workspace/:/home/developer/Project
+      - /home/local/apache-maven/:/home/developer/maven
+      - /home/rodnei/.config/:/home/developer/.config
+      - /home/rodnei/.m2/:/home/developer/.m2
+      - /home/rodnei/bkp/:/home/developer/bkp
+      - /home/local/jdk/:/home/developer/jdk
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 3000M
   mongodb:
     image: mongo:latest
     restart: unless-stopped
